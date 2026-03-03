@@ -1,118 +1,94 @@
-import { THEME } from '@/lib/theme';
-import { Link, Stack } from 'expo-router';
-import { MoonStarIcon, StarIcon, SunIcon } from 'lucide-react-native';
-import { useColorScheme } from 'nativewind';
-import * as React from 'react';
-import { Image, type ImageStyle, View, Text, TouchableOpacity } from 'react-native';
-import { BACKEND_URL, apiRequest } from '@/lib/api';
+import { View, Text, TouchableOpacity, ScrollView, SafeAreaView } from 'react-native';
+import { useRouter } from 'expo-router';
+import { User, Settings, Bell, ChevronRight, PlayCircle, BookOpen, Wind, Activity } from 'lucide-react-native';
 
-const LOGO = {
-  light: require('@/assets/images/react-native-reusables-light.png'),
-  dark: require('@/assets/images/react-native-reusables-dark.png'),
-};
+export default function HomeScreen() {
+  const router = useRouter();
 
-const SCREEN_OPTIONS = {
-  light: {
-    title: 'React Native Reusables',
-    headerTransparent: true,
-    headerShadowVisible: true,
-    headerStyle: { backgroundColor: THEME.light.background },
-    headerRight: () => <ThemeToggle />,
-  },
-  dark: {
-    title: 'React Native Reusables',
-    headerTransparent: true,
-    headerShadowVisible: true,
-    headerStyle: { backgroundColor: THEME.dark.background },
-    headerRight: () => <ThemeToggle />,
-  },
-};
-
-const IMAGE_STYLE: ImageStyle = {
-  height: 76,
-  width: 76,
-};
-
-export default function Screen() {
-  const { colorScheme } = useColorScheme();
-  const [apiResponse, setApiResponse] = React.useState<string>('');
-  const [isLoading, setIsLoading] = React.useState(false);
-
-  // Example: Test API connection
-  const testApiConnection = async () => {
-    setIsLoading(true);
-    try {
-      const response = await fetch(`${BACKEND_URL}/`);
-      const text = await response.text();
-      setApiResponse(text);
-    } catch (error) {
-      setApiResponse(`Error: ${error instanceof Error ? error.message : 'Unknown error'}`);
-    } finally {
-      setIsLoading(false);
+  const menuItems = [
+    {
+      title: 'Bilgilendirme Formu',
+      icon: <BookOpen size={24} color="#2D6A4F" />,
+      route: '/bilgilendirme',
+      description: 'Program hakkında detaylı bilgi'
+    },
+    {
+      title: 'Isınma Hareketleri',
+      icon: <Activity size={24} color="#2D6A4F" />,
+      route: '/exercise-list',
+      description: 'Egzersiz öncesi hazırlık'
+    },
+    {
+      title: 'Nefes Egzersizleri',
+      icon: <Wind size={24} color="#2D6A4F" />,
+      route: '/exercise-list',
+      description: 'KOAH için özel teknikler'
     }
-  };
+  ];
 
   return (
-    <>
-      <Stack.Screen options={SCREEN_OPTIONS[colorScheme ?? 'light']} />
-      <View className="flex-1 items-center justify-center gap-8 p-4">
-        <Image source={LOGO[colorScheme ?? 'light']} style={IMAGE_STYLE} resizeMode="contain" />
-        <View className="gap-2 p-4">
-          <Text className="ios:text-foreground font-mono text-sm text-muted-foreground">
-            1. Edit <Text className="font-mono">app/index.tsx</Text> to get started.
-          </Text>
-          <Text className="ios:text-foreground font-mono text-sm text-muted-foreground">
-            2. Save to see your changes instantly.
-          </Text>
-          <Text className="ios:text-foreground mt-2 font-mono text-xs text-muted-foreground">
-            API: {BACKEND_URL}
-          </Text>
+    <SafeAreaView className="flex-1 bg-background">
+      {/* Header */}
+      <View className="flex-row items-center justify-between px-6 py-4">
+        <View>
+          <Text className="text-2xl font-bold text-foreground">KOAH EGZERSİZ</Text>
+          <Text className="text-muted-foreground">Bugünkü egzersize hazır mıyız?</Text>
         </View>
-        <View className="items-center gap-2 p-4">
-          <TouchableOpacity
-            onPress={testApiConnection}
-            disabled={isLoading}
-            className="rounded-md bg-secondary px-4 py-2">
-            <Text className="text-secondary-foreground">
-              {isLoading ? 'Testing...' : 'Test API Connection'}
-            </Text>
+        <View className="flex-row gap-4">
+          <TouchableOpacity onPress={() => router.push('/admin')}>
+            <Settings size={22} color="#4A7C59" />
           </TouchableOpacity>
-          {apiResponse && (
-            <Text className="ios:text-foreground font-mono text-xs text-muted-foreground">
-              Response: {apiResponse}
-            </Text>
-          )}
-        </View>
-        <View className="flex-row gap-2">
-          <Link href="https://reactnativereusables.com" asChild>
-            <TouchableOpacity className="rounded-md bg-primary px-4 py-2">
-              <Text className="text-primary-foreground">Browse the Docs</Text>
-            </TouchableOpacity>
-          </Link>
-          <Link href="https://github.com/founded-labs/react-native-reusables" asChild>
-            <TouchableOpacity className="flex-row items-center gap-2 rounded-md px-4 py-2">
-              <Text>Star the Repo</Text>
-              <StarIcon size={16} />
-            </TouchableOpacity>
-          </Link>
+          <TouchableOpacity>
+            <Bell size={22} color="#4A7C59" />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <User size={22} color="#4A7C59" />
+          </TouchableOpacity>
         </View>
       </View>
-    </>
-  );
-}
 
-const THEME_ICONS = {
-  light: SunIcon,
-  dark: MoonStarIcon,
-};
+      <ScrollView className="flex-1 px-6 pt-4" showsVerticalScrollIndicator={false}>
+        {/* Progress Card */}
+        <View className="bg-primary/10 p-6 rounded-[24px] mb-8 flex-row items-center justify-between border border-primary/20">
+          <View className="flex-1">
+            <Text className="text-primary font-semibold mb-1">Günlük İlerleme</Text>
+            <Text className="text-2xl font-bold text-foreground mb-2">%65 Tamamlandı</Text>
+            <View className="h-2 bg-secondary rounded-full overflow-hidden">
+              <View className="h-full bg-primary" style={{ width: '65%' }} />
+            </View>
+          </View>
+          <View className="ml-4 bg-white/50 p-3 rounded-full">
+            <PlayCircle size={32} color="#2D6A4F" />
+          </View>
+        </View>
 
-function ThemeToggle() {
-  const { colorScheme, toggleColorScheme } = useColorScheme();
-  const IconComponent = THEME_ICONS[colorScheme ?? 'light'];
+        {/* Menu Items */}
+        <Text className="text-lg font-bold text-foreground mb-4">Hızlı Erişim</Text>
+        {menuItems.map((item, index) => (
+          <TouchableOpacity
+            key={index}
+            onPress={() => router.push(item.route)}
+            className="bg-card p-4 rounded-[20px] mb-4 flex-row items-center shadow-sm border border-border"
+          >
+            <View className="bg-primary/10 p-3 rounded-xl mr-4">
+              {item.icon}
+            </View>
+            <View className="flex-1">
+              <Text className="text-lg font-semibold text-foreground">{item.title}</Text>
+              <Text className="text-sm text-muted-foreground">{item.description}</Text>
+            </View>
+            <ChevronRight size={20} color="#94A3B8" />
+          </TouchableOpacity>
+        ))}
 
-  return (
-    <TouchableOpacity onPress={toggleColorScheme} className="rounded-full p-2 web:mx-4">
-      <IconComponent size={20} />
-    </TouchableOpacity>
+        {/* Info Box */}
+        <View className="bg-secondary/50 p-6 rounded-[24px] mt-4 mb-8">
+          <Text className="text-primary font-bold mb-2">Günün Tavsiyesi</Text>
+          <Text className="text-foreground leading-5">
+            Egzersiz yaparken nefesinizi tutmamaya özen gösterin. Yorulduğunuzda dinlenin.
+          </Text>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
