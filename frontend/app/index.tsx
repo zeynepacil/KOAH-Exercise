@@ -8,19 +8,19 @@ export default function HomeScreen() {
   const menuItems = [
     {
       title: 'Bilgilendirme Formu',
-      icon: <BookOpen size={24} color="#2D6A4F" />,
+      icon: <BookOpen size={24} color="hsl(158, 50%, 50%)" />,
       route: '/bilgilendirme',
       description: 'Program hakkında detaylı bilgi'
     },
     {
       title: 'Isınma Hareketleri',
-      icon: <Activity size={24} color="#2D6A4F" />,
+      icon: <Activity size={24} color="hsl(158, 50%, 50%)" />,
       route: '/exercise-list',
       description: 'Egzersiz öncesi hazırlık'
     },
     {
       title: 'Nefes Egzersizleri',
-      icon: <Wind size={24} color="#2D6A4F" />,
+      icon: <Wind size={24} color="hsl(158, 50%, 50%)" />,
       route: '/exercise-list',
       description: 'KOAH için özel teknikler'
     }
