@@ -8,7 +8,7 @@ const EXERCISES = [
     title: 'Nefes Egzersizleri',
     duration: '5 dakika',
     description: 'Ayakta yapılan solunum teknikleri',
-    icon: <Wind size={20} color="#2D6A4F" />,
+    icon: <Wind size={20} color="hsl(158, 50%, 50%)" />,
     type: 'Breath',
   },
   {
@@ -16,7 +16,7 @@ const EXERCISES = [
     title: 'Nefes Egzersizleri',
     duration: '5 dakika',
     description: 'Oturarak yapılan solunum teknikleri',
-    icon: <Wind size={20} color="#2D6A4F" />,
+    icon: <Wind size={20} color="hsl(158, 50%, 50%)" />,
     type: 'Breath',
   },
   {
@@ -24,7 +24,7 @@ const EXERCISES = [
     title: 'Isınma Hareketleri',
     duration: '5 dakika',
     description: 'Egzersiz öncesi kas hazırlığı',
-    icon: <Activity size={20} color="#2D6A4F" />,
+    icon: <Activity size={20} color="hsl(158, 50%, 50%)" />,
     type: 'Warmup',
   },
 ];
@@ -37,7 +37,7 @@ export default function ExerciseListScreen() {
       onPress={() => router.push(`/exercise-detail/${item.id}`)}
       className="bg-card p-5 rounded-[24px] mb-4 flex-row items-center shadow-sm border border-border"
     >
-      <View className="bg-primary/10 p-4 rounded-2xl mr-4">
+      <View className="bg-primary/10 p-4 rounded-2xl mr-4 border border-primary/10">
         {item.icon}
       </View>
       <View className="flex-1">
@@ -55,9 +55,9 @@ export default function ExerciseListScreen() {
   return (
     <SafeAreaView className="flex-1 bg-background">
       {/* Header */}
-      <View className="px-6 py-6">
+      <View className="px-6 py-6 border-b border-border mb-4">
         <TouchableOpacity onPress={() => router.back()} className="mb-4">
-          <ChevronLeft size={24} color="#4A7C59" />
+          <ChevronLeft size={24} color="hsl(158, 50%, 50%)" />
         </TouchableOpacity>
         <Text className="text-3xl font-bold text-foreground">Egzersizler</Text>
         <Text className="text-muted-foreground mt-1">Sizin için hazırlanan program</Text>
