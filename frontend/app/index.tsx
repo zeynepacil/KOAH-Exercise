@@ -28,39 +28,42 @@ export default function HomeScreen() {
 
   return (
     <SafeAreaView className="flex-1 bg-background">
-      {/* Header */}
-      <View className="flex-row items-center justify-between px-6 py-4">
-        <View>
-          <Text className="text-2xl font-bold text-foreground">KOAH EGZERSİZ</Text>
-          <Text className="text-muted-foreground">Bugünkü egzersize hazır mıyız?</Text>
-        </View>
-        <View className="flex-row gap-4">
-          <TouchableOpacity onPress={() => router.push('/admin')}>
-            <Settings size={22} color="#4A7C59" />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Bell size={22} color="#4A7C59" />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <User size={22} color="#4A7C59" />
-          </TouchableOpacity>
-        </View>
-      </View>
-
-      <ScrollView className="flex-1 px-6 pt-4" showsVerticalScrollIndicator={false}>
-        {/* Progress Card */}
-        <View className="bg-primary/10 p-6 rounded-[24px] mb-8 flex-row items-center justify-between border border-primary/20">
-          <View className="flex-1">
-            <Text className="text-primary font-semibold mb-1">Günlük İlerleme</Text>
-            <Text className="text-2xl font-bold text-foreground mb-2">%65 Tamamlandı</Text>
-            <View className="h-2 bg-secondary rounded-full overflow-hidden">
-              <View className="h-full bg-primary" style={{ width: '65%' }} />
+          {/* Header */}
+          <View className="flex-row items-center justify-between px-6 py-4">
+            <View>
+              <Text className="text-2xl font-bold text-foreground">KOAH EGZERSİZ</Text>
+              <Text className="text-muted-foreground">Bugünkü egzersize hazır mıyız?</Text>
+            </View>
+            <View className="flex-row gap-4">
+              <TouchableOpacity onPress={() => router.push('/notifications')}>
+                <Bell size={22} color="hsl(158, 50%, 50%)" />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => router.push('/settings')}>
+                <Settings size={22} color="hsl(158, 50%, 50%)" />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => router.push('/profile')}>
+                <User size={22} color="hsl(158, 50%, 50%)" />
+              </TouchableOpacity>
             </View>
           </View>
-          <View className="ml-4 bg-white/50 p-3 rounded-full">
-            <PlayCircle size={32} color="#2D6A4F" />
-          </View>
-        </View>
+  
+          <ScrollView className="flex-1 px-6 pt-4" showsVerticalScrollIndicator={false}>
+            {/* Progress Card */}
+            <TouchableOpacity 
+              onPress={() => router.push('/progress-detail')}
+              className="bg-primary/10 p-6 rounded-[24px] mb-8 flex-row items-center justify-between border border-primary/20"
+            >
+              <View className="flex-1">
+                <Text className="text-primary font-semibold mb-1">Günlük İlerleme</Text>
+                <Text className="text-2xl font-bold text-foreground mb-2">%65 Tamamlandı</Text>
+                <View className="h-2 bg-secondary rounded-full overflow-hidden">
+                  <View className="h-full bg-primary" style={{ width: '65%' }} />
+                </View>
+              </View>
+              <View className="ml-4 bg-white/80 p-3 rounded-full">
+                <PlayCircle size={32} color="hsl(158, 50%, 50%)" />
+              </View>
+            </TouchableOpacity>
 
         {/* Menu Items */}
         <Text className="text-lg font-bold text-foreground mb-4">Hızlı Erişim</Text>
