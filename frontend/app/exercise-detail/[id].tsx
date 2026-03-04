@@ -48,66 +48,69 @@ export default function ExerciseDetailScreen() {
 
   return (
     <SafeAreaView className="flex-1 bg-background">
-      {/* Header */}
-      <View className="flex-row items-center justify-between px-6 py-4">
-        <TouchableOpacity onPress={() => router.back()} className="p-2 rounded-full bg-white/80 shadow-sm">
-          <ChevronLeft size={24} color="#4A7C59" />
-        </TouchableOpacity>
-        <Text className="text-xl font-bold text-foreground">Detay</Text>
-        <View className="w-10" />
-      </View>
-
-      <ScrollView className="flex-1 px-6 pt-4" showsVerticalScrollIndicator={false}>
-        {/* Image Placeholder */}
-        <View className="w-full h-56 bg-primary/10 rounded-[32px] items-center justify-center mb-6 overflow-hidden border border-primary/20">
-          <View className="bg-white/50 p-6 rounded-full">
-            <Play size={48} color="#2D6A4F" fill="#2D6A4F" />
-          </View>
-          <Text className="mt-4 text-primary font-bold">Egzersiz Görseli / Videosu</Text>
+        {/* Header */}
+        <View className="flex-row items-center justify-between px-6 py-4">
+          <TouchableOpacity onPress={() => router.back()} className="p-2 rounded-full bg-white shadow-sm border border-border">
+            <ChevronLeft size={24} color="hsl(158, 50%, 50%)" />
+          </TouchableOpacity>
+          <Text className="text-xl font-bold text-foreground">Detay</Text>
+          <View className="w-10" />
         </View>
-
-        <View className="flex-row items-center mb-6">
-          <View className="bg-secondary p-3 rounded-2xl mr-4">
-            <Clock size={24} color="#2D6A4F" />
-          </View>
-          <View>
-            <Text className="text-2xl font-bold text-foreground">{exercise.title}</Text>
-            <Text className="text-muted-foreground">{exercise.duration}</Text>
-          </View>
-        </View>
-
-        {/* Instructions */}
-        <View className="bg-card p-6 rounded-[24px] mb-6 shadow-sm border border-border">
-          <View className="flex-row items-center mb-4">
-            <Info size={20} color="#2D6A4F" className="mr-2" />
-            <Text className="text-lg font-bold text-foreground">Nasıl Yapılır?</Text>
-          </View>
-          {exercise.instructions.map((step, index) => (
-            <View key={index} className="flex-row mb-3">
-              <Text className="text-primary font-bold mr-3">{index + 1}.</Text>
-              <Text className="text-muted-foreground flex-1 leading-5">{step}</Text>
+  
+        <ScrollView className="flex-1 px-6 pt-4" showsVerticalScrollIndicator={false}>
+          {/* Image Placeholder */}
+          <View className="w-full h-56 bg-primary/10 rounded-[32px] items-center justify-center mb-6 overflow-hidden border border-primary/20">
+            <View className="bg-white/80 p-6 rounded-full shadow-sm">
+              <Play size={48} color="hsl(158, 50%, 50%)" fill="hsl(158, 50%, 50%)" />
             </View>
-          ))}
-        </View>
-
-        {/* Warning Message */}
-        <View className="bg-destructive/10 p-6 rounded-[24px] mb-10 flex-row items-start border border-destructive/20">
-          <AlertCircle size={24} color="#EF4444" className="mr-3" />
-          <View className="flex-1">
-            <Text className="text-destructive font-bold mb-1">Önemli Uyarı</Text>
-            <Text className="text-destructive/80 leading-5 italic">
-              {exercise.warning}
-            </Text>
+            <Text className="mt-4 text-primary font-bold">Egzersiz Görseli / Videosu</Text>
           </View>
-        </View>
-
-        <TouchableOpacity
-          className="bg-primary p-5 rounded-[24px] mb-12 items-center shadow-lg shadow-primary/30"
-          onPress={() => console.log('Egzersiz Başlatıldı')}
-        >
-          <Text className="text-white font-bold text-xl">Egzersizi Başlat</Text>
-        </TouchableOpacity>
-      </ScrollView>
+  
+          <View className="flex-row items-center mb-6">
+            <View className="bg-secondary p-3 rounded-2xl mr-4 border border-primary/10">
+              <Clock size={24} color="hsl(158, 50%, 50%)" />
+            </View>
+            <View>
+              <Text className="text-2xl font-bold text-foreground">{exercise.title}</Text>
+              <Text className="text-muted-foreground">{exercise.duration}</Text>
+            </View>
+          </View>
+  
+          {/* Instructions */}
+          <View className="bg-card p-6 rounded-[24px] mb-6 shadow-sm border border-border">
+            <View className="flex-row items-center mb-4">
+              <Info size={20} color="hsl(158, 50%, 50%)" className="mr-2" />
+              <Text className="text-lg font-bold text-foreground">Nasıl Yapılır?</Text>
+            </View>
+            {exercise.instructions.map((step, index) => (
+              <View key={index} className="flex-row mb-3">
+                <Text className="text-primary font-bold mr-3">{index + 1}.</Text>
+                <Text className="text-muted-foreground flex-1 leading-5">{step}</Text>
+              </View>
+            ))}
+          </View>
+  
+          {/* Warning Message */}
+          <View className="bg-destructive/10 p-6 rounded-[24px] mb-10 flex-row items-start border border-destructive/20">
+            <AlertCircle size={24} color="#EF4444" className="mr-3" />
+            <View className="flex-1">
+              <Text className="text-destructive font-bold mb-1">Önemli Uyarı</Text>
+              <Text className="text-destructive/80 leading-5 italic">
+                {exercise.warning}
+              </Text>
+            </View>
+          </View>
+  
+          <TouchableOpacity
+            className="bg-primary p-5 rounded-[24px] mb-12 items-center shadow-lg shadow-primary/30 active:opacity-90"
+            onPress={() => router.push({
+              pathname: '/exercise-timer',
+              params: { id, title: exercise.title }
+            })}
+          >
+            <Text className="text-white font-bold text-xl">Egzersizi Başlat</Text>
+          </TouchableOpacity>
+        </ScrollView>
     </SafeAreaView>
   );
 }
