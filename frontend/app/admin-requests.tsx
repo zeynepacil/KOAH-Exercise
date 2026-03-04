@@ -34,6 +34,7 @@ export default function AdminRequestsScreen() {
         {requests.map((req) => (
           <TouchableOpacity 
             key={req.id}
+            onPress={() => router.push(`/admin-request-detail/${req.id}`)}
             className="bg-card p-4 rounded-2xl mb-4 shadow-sm border border-border flex-row items-center justify-between"
           >
             <View className="flex-row items-center flex-1">
