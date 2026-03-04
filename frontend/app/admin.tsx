@@ -132,7 +132,7 @@ export default function AdminDashboard() {
           {[1, 2, 3].map((item) => (
             <TouchableOpacity 
               key={item} 
-              onPress={() => router.push('/admin-requests')}
+              onPress={() => router.push(`/admin-request-detail/${item}`)}
               className="flex-row items-center py-4 border-b border-border/50 last:border-0"
             >
               <View className="w-10 h-10 rounded-full bg-secondary items-center justify-center mr-4">
@@ -143,7 +143,7 @@ export default function AdminDashboard() {
                 <Text className="text-xs text-muted-foreground">Video İzleme Hatası Talebi</Text>
               </View>
               <Text className="text-[10px] text-muted-foreground mr-3">14:20</Text>
-              <ChevronRight size={16} color="#CBD5E1" />
+              <ChevronRight size={16} color="hsl(158, 50%, 50%)" />
             </TouchableOpacity>
           ))}
         </View>
